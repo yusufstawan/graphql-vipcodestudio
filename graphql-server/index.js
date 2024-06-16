@@ -22,7 +22,9 @@ const typeDefs = `#graphql
 
     type Query {
         books: [Book!]!
+        book(id: ID!): Book!
         members: [Member!]!
+        member(id: ID!): Member!
     }
 `;
 
@@ -31,8 +33,14 @@ const resolvers = {
     books: () => {
       return books;
     },
+    book: (_, args) => {
+      return books.find((book) => book.id === args.id);
+    },
     members: () => {
       return members;
+    },
+    member: (_, args) => {
+      return members.find((member) => member.id === args.id);
     },
   },
 };
